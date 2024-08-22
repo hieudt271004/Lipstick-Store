@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"
+      class="h-100"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">LIPSTICK STORE</title>
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" th:href="@{/css/fontawesome/all.css}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap.min.css}"/>
+  <link rel="stylesheet" th:href="@{/css/bootstrap/bootstrap-icons.min.css}"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" th:href="@{/css/color.css}"/>
+  <link rel="stylesheet" th:href="@{/css/table.css}"/>
+  <link rel="stylesheet" th:href="@{/css/common.css}"/>
+</head>
+<body onkeydown="showSearchForm(event)" class="d-flex flex-column h-100">
+  <div th:replace="~{component/icon :: svg}"></div>
+  <div th:replace="~{component/navbar :: navbar}"></div>
+
+  <th:block layout:fragment="content"></th:block>
+
+  <div th:replace="~{component/footer :: footer}"></div>
+  <div th:replace="~{modal/search-product :: search-product-modal}"></div>
+
+  <th:block layout:fragment="modal"></th:block>
+
+  <div th:replace="~{toast/toast-error :: toast-error}"></div>
+  <div th:replace="~{toast/toast-success :: toast-success}"></div>
+
+  <script th:src="@{/js/bootstrap/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/js/common.js}"></script>
+  <script th:src="@{/js/color-mode.js}"></script>
+  <th:block layout:fragment="js"></th:block>
+</body>
+</html>

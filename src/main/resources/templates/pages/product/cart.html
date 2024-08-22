@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+  <title>Giỏ hàng</title>
+  <link rel="stylesheet" th:href="@{/css/cart.css}" />
+</head>
+
+<body>
+  <th:block layout:fragment="content">
+    <th:block th:if="${session.cart == null}">
+      <section id="cover">
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col">
+              <h1 class="title text-center mb-4">
+                <span>Giỏ hàng trống!</span>
+              </h1>
+              <div class="text-center">
+                <a th:href="@{/}" type="submit" class="btn btn-danger m-0 py-2 px-4">
+                  MUA HÀNG
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </th:block>
+
+    <th:block th:if="${session.cart != null}">
+      <section id="cover">
+        <div class="container mt-4">
+          <div class="row">
+            <div class="col">
+              <h1 class="title mb-3">
+                <span>Giỏ hàng</span>
+                <span class="ms-1 title-quantity text-danger" th:text="'[' + ${session.totalProductInCart} + ']'"></span>
+              </h1>
+              <p class="title-des">
+                Quý khách vui lòng kiểm tra lại sản phẩm, số lượng và tổng giá trị đơn hàng trước khi tiếp tục mua hàng.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cart">
+        <div class="container">
+          <!-- List item -->
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="panel pt-2">
+                <table id="cart-table" class="table mb-0" cellspacing="0" width="100%">
+                  <thead>
+                    <tr>
+                      <th>Tên sản phẩm</th>
+                      <th class="text-center">Giá</th>
+                      <th class="text-center">Số lượng</th>
+                      <th class="text-end">Thành tiền</th>
+                      <th class="text-end">&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="item : ${session.cart}">
+                      <td class="text-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div class="icon-circle">
+                            <img class="media-object" th:src="@{'/images/products/' + *{item.image}}" alt="">
+                          </div>
+                          <div class="content-body">
+                            <a href="javascript:void(0)">
+                              <span th:text="*{item.name + ' - ' + item.color}"></span>
+                            </a>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-end">
+                        <span th:text="*{#numbers.formatInteger(item.price, 3, 'POINT')}"></span><sup>đ</sup>
+                      </td>
+                      <td class="text-center">
+                        <div class="quantity-group">
+                          <div>
+                            <a href="javascript:void(0)" class="btn-change-quantity btn-dash">
+                              <i class="bi bi-dash-lg text-danger"></i>
+                            </a>
+                            <span class="quantity-number" th:text="*{item.quantity}"></span>
+                            <a href="javascript:void(0)" class="btn-change-quantity btn-plus">
+                              <i class="bi bi-plus-lg text-danger"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="text-end">
+                        <span class="color-tan fw-medium" th:text="*{#numbers.formatInteger(item.amount, 3, 'POINT')}"></span><sup>đ</sup>
+                      </td>
+                      <td class="text-end">
+                        <a href="javascript:void(0)" class="btn-circle mx-0" th:onclick="'javascript:confirmDeleteItemInCart(' + ${item.id} + ')'">
+                          <i class="far fa-trash-alt text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Xoá"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Total money -->
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="d-flex justify-content-between align-items-center mt-4">
+                <div>
+                  <a href="javascript:void(0)" class="btn btn-md btn-danger py-2 px-3" th:onclick="'javascript:confirmDeleteCart()'">
+                    <i class="far fa-trash-alt me-2"></i>Xoá giỏ hàng
+                  </a>
+                </div>
+                <div class="d-flex">
+                  <div class="d-flex align-items-center number me-4">
+                    Số lượng sản phẩm:&nbsp;&nbsp;<span class="text-danger" th:text="${session.totalProductInCart}"></span>
+                  </div>
+                  <div class="d-flex align-items-center number me-4">
+                    Tổng tiền:&nbsp;&nbsp;<span class="text-danger fw-medium" th:text="${#numbers.formatInteger(session.totalAmountOfCart, 3, 'POINT')}"></span><sup class="text-danger">đ</sup>
+                  </div>
+                  <a th:href="@{/checkout}" class="btn btn-md btn-success py-2 px-3">
+                    <i class="fas fa-share me-2"></i>MUA HÀNG
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </th:block>
+  </th:block>
+
+  <th:block layout:fragment="modal">
+    <div th:replace="~{modal/common/confirm-modal :: confirm-modal}"></div>
+  </th:block>
+
+  <th:block layout:fragment="js">
+    <script th:src="@{/js/cart.js}"></script>
+  </th:block>
+</body>
+
+</html>

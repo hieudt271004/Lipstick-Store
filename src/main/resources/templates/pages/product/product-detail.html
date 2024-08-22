@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+  <title>Product detail</title>
+  <link rel="stylesheet" th:href="@{/css/product-detail.css}"/>
+</head>
+<body>
+  <th:block layout:fragment="content">
+    <section id="product-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-5">
+            <div class="product-detail-image">
+              <div class="slides" th:each="image : ${product.productImageList}">
+                <img th:src="@{'/images/products/' + *{image.productImage}}" style="width:100%" alt="" th:onclick="'javascript:openModal1()'">
+              </div>
+
+              <a class="prev" onclick="plusSlides(-1)">❮</a>
+              <a class="next" onclick="plusSlides(1)">❯</a>
+
+              <div class="row-image">
+                <div class="column" th:each="image, i : ${product.productImageList}">
+                  <img class="demo cursor" th:src="@{'/images/products/' + *{image.productImage}}"
+                       style="width:100%"
+                       th:onclick="'javascript:currentSlide(' + *{i.count} + ')'"
+                       alt=""
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-7 content">
+            <div class="product-detail-info">
+              <h3 class="product-name" th:text="${product.productName + ' - ' + product.productColor}"></h3>
+              <h4 class="product-price text-danger">
+                <span th:text="${#numbers.formatInteger(product.productPrice, 3, 'POINT')}"></span><sup>đ</sup>
+              </h4>
+              <div class="product-description">
+                <p th:utext="${product.productShortDescription}"></p>
+              </div>
+              <div class="product-quantity">
+                <form>
+                  <div class="row mt-3">
+                    <div class="col-auto">
+                      <label class="col-form-label">Số lượng</label>
+                    </div>
+                    <div class="col-auto">
+                      <div class="quantity-group">
+                        <div>
+                          <a href="javascript:void(0)" th:onclick="updateProductQuantity(0)" class="btn-change-quantity btn-dash">
+                            <i class="bi bi-dash-lg text-danger"></i>
+                          </a>
+                          <label>
+                            <input id="quantity-number" class="quantity-number" type="text" name="quantity-number" th:value="1" />
+                          </label>
+                          <a href="javascript:void(0)" th:onclick="updateProductQuantity(1)" class="btn-change-quantity btn-plus">
+                            <i class="bi bi-plus-lg text-danger"></i>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto ms-3">
+                      <label id="quantity-stock" class="col-form-label" th:text="${product.productQuantity}"></label> sản phẩm có sẵn
+                    </div>
+                  </div>
+                  <div class="mt-4 d-flex">
+                    <button class="btn btn-danger me-3 py-2 px-3" name="btn-buy-now" type="submit">
+                      <i class="fas fa-share me-2"></i>Mua ngay
+                    </button>
+                    <button class="btn btn-success py-2 px-3"
+                            th:onclick="'javascript:addToCart(' + ${product.id} + ')'"
+                            type="button"><i class="fas fa-cart-plus me-2"></i>Thêm vào giỏ hàng
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="support bg-warning bg-opacity-10">
+              <div class="title">HỖ TRỢ MUA HÀNG</div>
+              <div class="mobile">0973 888 678 / 0989 234 566</div>
+              <div class="note">(Sản phẩm chính hãng 100%, đổi trả 30 ngày, Free ship từ 800k)</div>
+            </div>
+
+            <div class="tabs-info mt-4">
+              <ul class="nav nav-underline" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="shipping-policy-tab" data-bs-toggle="tab" data-bs-target="#shipping-policy-tab-pane" type="button" role="tab" aria-controls="shipping-policy-tab-pane" aria-selected="true">
+                    GIAO HÀNG & ĐỔI TRẢ
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="about-brand-tab" data-bs-toggle="tab" data-bs-target="#about-brand-tab-pane" type="button" role="tab" aria-controls="about-brand-tab-pane" aria-selected="false">
+                    VỀ THƯƠNG HIỆU
+                  </button>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="shipping-policy-tab-pane" role="tabpanel" aria-labelledby="shipping-policy-tab" tabindex="0">
+                  <div class="mt-3">
+                    <div>Áp dụng cho toàn bộ sản phẩm túi xách nguyên giá của <span class="fw-medium">Pedro</span>.</div>
+                    <div><span class="fw-medium">Đối tượng khách hàng:</span> Tất cả khách hàng sử dụng dịch vụ tại <a target="_blank" rel="noopener noreferrer" href="#">www.lipstick.vn</a></div>
+                    <p class="mb-0 mt-2"><span class="fw-medium">Thời gian đổi/ trả hàng:</span></p>
+                    <ul class="mt-1">
+                      <li><span class="fw-medium">Đổi hàng:</span> Trong vòng <span class="fw-medium">30 ngày</span> kể từ ngày khách hàng nhận được sản phẩm.</li>
+                      <li><span class="fw-medium">Trả hàng:</span> Trong vòng <span class="fw-medium">03 ngày</span> kể từ ngày khách hàng nhận được sản phẩm.</li>
+                    </ul>
+                    <p><em>Lưu ý: Không áp dụng cho các sản phẩm giảm giá từ 30% trở lên và các sản phẩm mua trực tiếp tại hệ thống cửa hàng của Maison.</em></p>
+                    <p><u>Ghi chú:</u> Thời hạn đổi/trả hàng được tính từ ngày khách hàng nhận hàng cho đến ngày khách hàng gửi hàng đổi/trả cho đơn vị vận chuyển.</p>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="about-brand-tab-pane" role="tabpanel" aria-labelledby="about-brand-tab" tabindex="0">
+                  <div class="mt-3" th:utext="${product.brand.brandDescription}"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<!--    <section id="viewed-products">-->
+<!--      <div class="container">-->
+<!--        <div class="row">-->
+<!--          <h4 class="mb-4">SẢN PHẨM ĐÃ XEM</h4>-->
+<!--          <div class="col-12 col-sm-6 col-md-4 col-lg-2" th:each="product : ${products}">-->
+<!--            <div class="card">-->
+<!--              <img th:src="@{'/images/products/' + *{product.productImage}}" class="card-img-top rounded-3" alt="...">-->
+<!--              <div class="card-body">-->
+<!--                <h5 class="card-title product-title">-->
+<!--                  <a class="text-dark-emphasis text-decoration-none" th:href="@{'detail/' + *{product.id}}">-->
+<!--                    <span th:text="*{product.productName}"></span>-->
+<!--                  </a>-->
+<!--                </h5>-->
+<!--                <h5 class="product-price text-danger">-->
+<!--                  <span th:text="*{#numbers.formatInteger(product.productPrice, 3, 'POINT')}"></span><sup>đ</sup>-->
+<!--                </h5>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+  </th:block>
+
+  <th:block layout:fragment="js">
+    <script th:src="@{/js/product-detail.js}"></script>
+  </th:block>
+</body>
+</html>

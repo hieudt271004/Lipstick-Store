@@ -1,0 +1,41 @@
+/**
+ * COLOR ---------------------------------------------------------------------------------------------------------------
+ */
+
+html[data-bs-theme='light'] {
+  --sub-nav-border-color: #e3e3e3;
+
+  /* border-color ------------------------------------ */
+  --primary-border-color: transparent;
+  --secondary-border-color: #dee2e6;
+  --third-border-color: #D5D6DB;
+
+  /* button-background-color ------------------------- */
+  --primary-button-background-color: #FFFFFF;
+  --secondary-button-background-color: #dee2e6;
+
+  /* text-color -------------------------------------- */
+  --primary-text: #050505;
+  --secondary-text: #65676B;
+
+  --shadow-button: rgb(228 230 235 / 55%);
+}
+
+html[data-bs-theme='dark'] {
+  --sub-nav-border-color: #676f79;
+
+  /* border-color ------------------------------------ */
+  --primary-border-color: transparent;
+  --secondary-border-color: #3A3B3C;
+  --third-border-color: #4E4F50;
+
+  /* button-background-color ------------------------- */
+  --primary-button-background-color: #242526;
+  --secondary-button-background-color: #3A3B3C;
+
+  /* text-color -------------------------------------- */
+  --primary-text: #E4E6EB;
+  --secondary-text: #B0B3B8;
+
+  --shadow-button: rgb(58 59 60 / 55%);
+}

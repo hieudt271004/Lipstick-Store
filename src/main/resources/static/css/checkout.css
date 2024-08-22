@@ -1,0 +1,96 @@
+/**
+ * CART ----------------------------------------------------------------------------------------------------------------
+ */
+
+#customer-info .panel {
+  border-radius: 12px;
+  border: 2px dashed var(--bs-border-color);
+  color: var(--primary-text);
+  padding: 12px 20px 15px;
+}
+
+#customer-info .panel .customer-name {
+  font-size: 22px;
+  font-style: italic;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-weight: 400;
+}
+
+#customer-info .panel .customer-shipping-address {
+  font-style: italic;
+}
+
+#checkout {
+  margin-top: 20px;
+  padding-bottom: 50px;
+}
+
+#checkout .panel {
+  border-radius: 12px;
+  border: 2px dashed var(--bs-border-color);
+  color: var(--primary-text);
+  padding: 20px;
+}
+
+#checkout table>tbody>tr>th,
+#checkout table>tfoot>tr>th,
+#checkout table>thead>tr>th {
+  font-size: 16px !important;
+  font-weight: 500;
+}
+
+#checkout table tr th {
+  padding-top: 8px;
+  padding-bottom: 16px;
+}
+
+#checkout table .d-flex {
+  max-width: 500px;
+}
+
+#checkout table .d-flex .icon-circle img {
+  border-radius: 6px;
+  margin-right: 16px;
+  width: 52px;
+  height: 52px;
+}
+
+#checkout table .d-flex .content-body {
+  text-align: left;
+  width: 100%;
+}
+
+#checkout table .d-flex .content-body a {
+  color: var(--secondary-text);
+}
+
+#checkout table .d-flex .content-body a:hover {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;
+}
+
+#checkout .number span {
+  font-size: 20px;
+}
+
+#checkout input {
+  width: 400px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid var(--sub-nav-border-color);
+  border-radius: 0;
+  padding: 12px 10px;
+  text-align: right;
+}
+
+#checkout input.form-control:focus {
+  box-shadow: none;
+}
+
+#addressListModal .address .address-info {
+  border-left: 1px solid var(--sub-nav-border-color);
+  padding-left: 16px;
+  margin-left: 8px;
+}

@@ -1,0 +1,37 @@
+/**
+ * PRODUCTS ------------------------------------------------------------------------------------------------------------
+ */
+
+#products .product-title span {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  height: 65px;
+  line-height: 1.35;
+}
+
+#products .product-title a:hover {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;
+}
+
+#products .product-price {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+#products .card {
+  border-color: transparent;
+  padding-top: 16px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+}
+
+#products .card:hover {
+  box-shadow: 0px 0px 8px 0px rgb(0 0 0 / 25%);
+}
+
+#products .card img {
+  border-radius: var(--bs-card-inner-border-radius);
+}

@@ -1,0 +1,27 @@
+<!-- Modal search -->
+<div class="modal fade"
+     style="--bs-modal-margin: 5rem;"
+     id="searchModal"
+     tabindex="-1"
+     aria-labelledby="searchModalLabel"
+     aria-hidden="true"
+     th:fragment="search-product-modal"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form th:action="@{/lipstick/search}" method="get">
+        <div class="modal-body">
+          <div class="form-floating">
+            <input type="text" name="productName" class="form-control" id="floatingInput" placeholder="Nhập tên sản phẩm để tìm kiếm">
+            <label class="text-dark-emphasis" for="floatingInput">Nhập tên sản phẩm để tìm kiếm</label>
+          </div>
+        </div>
+        <div class="modal-footer pt-0" style="border-top: none;">
+          <button type="submit" class="btn btn-danger m-0">
+            <i class="bi bi-search me-2"></i>Tìm kiếm
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

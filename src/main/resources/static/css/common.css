@@ -1,0 +1,394 @@
+/**
+ * HEADER --------------------------------------------------------------------------------------------------------------
+ */
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+
+
+/**
+ * SPACE ---------------------------------------------------------------------------------------------------------------
+ */
+
+.mr-12px {
+  margin-right: 12px !important;
+}
+
+
+/**
+ * LINK ----------------------------------------------------------------------------------------------------------------
+ */
+
+a {
+  text-decoration: none;
+}
+
+
+/**
+ * TABLE ---------------------------------------------------------------------------------------------------------------
+ */
+
+tbody, td, tfoot, th, thead, tr {
+  border-color: var(--bs-border-color) !important;
+}
+
+
+/**
+ * DROPDOWN ------------------------------------------------------------------------------------------------------------
+ */
+
+.dropdown-menu .active .bi {
+  display: block !important;
+}
+
+.dropdown-menu {
+  font-size: 15px;
+  border-radius: 8px;
+}
+
+.dropdown-toggle::after {
+  vertical-align: .2em;
+}
+
+
+/* MODAL ========================================================================================== */
+
+.modal-backdrop.show {
+  opacity: .75;
+}
+
+.modal-content {
+  border-radius: 12px;
+  border: none;
+}
+
+.modal-content .btn-close {
+  background: transparent;
+  color: var(--primary-text);
+  font-size: 20px;
+  display: flex;
+}
+
+.modal-content .btn-close:focus {
+  box-shadow: none;
+}
+
+.modal-content .modal-header .modal-title,
+.modal-content .modal-sub-title {
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.modal-content .modal-header {
+  /*border-bottom: 1px solid transparent;*/
+  padding: 12px 16px;
+}
+
+.modal-content .modal-footer {
+  /*border-top: 1px solid transparent;*/
+  padding: 16px;
+}
+
+.modal-footer>* {
+  margin: 0;
+}
+
+#confirmModal .modal-dialog {
+  width: 380px;
+}
+
+#confirmModal .modal-dialog .modal-content .modal-footer a{
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-decoration: none;
+}
+
+
+/**
+ * NAV -----------------------------------------------------------------------------------------------------------------
+ */
+
+.border-bot-shadow {
+  box-shadow: 0 1px 5px 0 rgb(0 0 0 / 40%);
+}
+
+.border-bot-solid {
+  border-bottom: 1px solid var(--sub-nav-border-color);
+}
+
+nav .key-search {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+nav.navbar {
+  --bs-navbar-nav-link-padding-x: 0.65rem
+}
+
+nav.navbar sup {
+  top: -0.75em;
+  right: 2px;
+}
+
+nav.navbar .badge {
+  --bs-badge-padding-x: 0.55em;
+}
+
+nav.navbar .bi {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentcolor;
+  display: inline-flex;
+}
+
+
+/**
+ * SUB NAV -------------------------------------------------------------------------------------------------------------
+ */
+
+.fixed-top-sub-nav {
+  position: fixed;
+  top: 56px;
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 1px 5px 0 rgb(0 0 0 / 40%);
+}
+
+.fix-sub-nav {
+  margin-top: 56px;
+}
+
+.sub-nav .nav-link {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.sub-nav .nav-underline .nav-link.active,
+.nav-underline .show > .nav-link {
+  font-weight: 500;
+}
+
+.sub-nav .col>div {
+  border-bottom: 1px solid var(--sub-nav-border-color);
+}
+
+.sub-nav.fixed-top-sub-nav .col>div {
+  border-bottom: 1px solid transparent;
+}
+
+
+/*
+ *
+ */
+
+.page-link {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity));
+}
+
+
+/**
+ * FOOTER --------------------------------------------------------------------------------------------------------------
+ */
+
+#footer .f-top {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+#footer .f-top img {
+  height: 45px;
+  margin-bottom: 7px;
+}
+
+#footer h6 {
+  margin-bottom: 13px;
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+#footer h6:hover {
+  color: #ffcf5c;
+}
+
+#footer .info ul,
+#footer .social ul {
+  padding: 0;
+}
+
+#footer .info ul li,
+#footer .social ul li {
+  list-style: none;
+  padding: .15rem 0;
+}
+
+#footer .course ul {
+  padding-left: 18px;
+}
+
+#footer .course ul li {
+  padding: .15rem 0;
+}
+
+#footer .social ul li a {
+  margin-right: 16px;
+}
+
+#footer .social ul li a:hover {
+  text-decoration: none;
+}
+
+#footer .social ul li a i {
+  font-size: 40px;
+}
+
+#footer .social ul li a.btn i {
+  font-size: 16px;
+}
+
+@media (max-width: 575.98px) {
+  #footer .f-top {
+    padding: 3rem 0 2.5rem;
+  }
+}
+
+
+/**
+ * COVER ---------------------------------------------------------------------------------------------------------------
+ */
+
+#cover {
+  padding: 120px 0 50px;
+}
+
+#cover .title {
+  font-family: "Noto Sans", "AdihausDIN", "Helvetica", Arial, sans-serif !important;
+  font-size: 48px;
+  font-style: italic;
+  text-transform: uppercase;
+}
+
+#cover .title .title-quantity {
+  font-size: 16px;
+  font-style: normal;
+  color: #767677;
+  font-weight: 300;
+}
+
+#cover .title-des {
+  max-width: 900px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 575.98px) {
+  #cover {
+    padding: 80px 0 10px;
+  }
+}
+
+
+/**
+ * TITLE ---------------------------------------------------------------------------------------------------------------
+ */
+
+.fix-mt-title {
+  margin-top: 16px !important;
+}
+
+.fix-mb-title {
+  margin-bottom: 16px !important;
+}
+
+.title {
+  font-size: 22px;
+  margin-bottom: 0;
+}
+
+
+/**
+ * BUTTON --------------------------------------------------------------------------------------------------------------
+ */
+
+.btn {
+  border-radius: 8px;
+}
+
+/* BUTTON ACTION - REMOTE */
+
+.btn-remove,
+.btn-action {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+}
+
+.btn-remove a,
+.btn-remove i {
+  font-size: 16px;
+  color: var(--danger-text);
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.btn-remove a:hover i {
+  color: #DC3545;
+}
+
+.btn-action a,
+.btn-action i {
+  font-size: 16px;
+  color: #198754;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.btn-action a:hover i {
+  color: #27D016;
+}
+
+
+/* BUTTON CIRCLE */
+
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  background-color: var(--secondary-button-background-color);
+  border-radius: 50%;
+  margin-left: 8px;
+  margin-right: 8px;
+  transition: .3s;
+  position: relative;
+  display: inline-block;
+}
+
+.btn-circle i {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.btn-circle:hover {
+  box-shadow: 0 0 0 4px var(--shadow-button);
+  border-color: var(--secondary-border-color);
+}

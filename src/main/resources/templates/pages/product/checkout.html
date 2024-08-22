@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
+<head>
+  <meta charset="UTF-8">
+  <title>Thanh toán</title>
+  <link rel="stylesheet" th:href="@{/css/checkout.css}" />
+</head>
+<body>
+  <th:block layout:fragment="content">
+    <section id="cover">
+      <div class="container mt-4">
+        <div class="row">
+          <div class="col">
+            <h1 class="title mb-3">
+              <span>Thanh toán</span>
+              <span class="ms-1 title-quantity text-danger" th:text="'[' + ${session.totalProductInCart} + ']'"></span>
+            </h1>
+            <p class="title-des">
+              Quý khách vui lòng kiểm tra lại địa chỉ giao hàng, sản phẩm, số lượng và tổng giá trị đơn hàng trước khi đặt hàng.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="customer-info">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel">
+              <div class="text-danger fw-medium"><i class="fas fa-map-marker-alt me-2"></i>Địa Chỉ Nhận Hàng</div>
+              <div>
+                <h3 class="customer-name" th:text="${user.fullName + ' – ' + user.userDetail.mobile}"></h3>
+                <p class="m-0">
+                  <span class="customer-shipping-address me-2" th:text="${defaultAddress.fullAddress}"></span>
+                  <sup class="badge bg-success-subtle border text-success-emphasis rounded-pill me-4">Mặc định</sup>
+                  <a href="javascript:void(0)" class="text-danger" data-bs-toggle="modal" data-bs-target="#addressListModal">
+                    Thay đổi
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="checkout">
+      <div class="container">
+        <!-- List item -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="panel pt-2">
+              <table id="cart-table" class="table mb-0" cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                  <th>Tên sản phẩm</th>
+                  <th class="text-center">Giá</th>
+                  <th class="text-center">Số lượng</th>
+                  <th class="text-end">Thành tiền</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item : ${session.cart}">
+                  <td class="text-center">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="icon-circle">
+                        <img class="media-object" th:src="@{'/images/products/' + *{item.image}}" alt="">
+                      </div>
+                      <div class="content-body">
+                        <a href="javascript:void(0)">
+                          <span th:text="*{item.name + ' - ' + item.color}"></span>
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-end">
+                    <span th:text="*{#numbers.formatInteger(item.price, 3, 'POINT')}"></span><sup>đ</sup>
+                  </td>
+                  <td class="text-center">
+                    <span th:text="*{item.quantity}"></span>
+                  </td>
+                  <td class="text-end">
+                    <span class="color-tan fw-medium" th:text="*{#numbers.formatInteger(item.amount, 3, 'POINT')}"></span><sup>đ</sup>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <div>Ghi chú - lời nhắn</div>
+                <div class="text-end">
+                  <input id="order-note" type="text" class="form-control" placeholder="Nhập lời nhắn cho cửa hàng">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Total money -->
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="d-flex justify-content-between align-items-center mt-4">
+              <div></div>
+              <div class="d-flex">
+                <div class="d-flex align-items-center number me-4">
+                  Số lượng sản phẩm:&nbsp;&nbsp;<span class="text-danger" th:text="${session.totalProductInCart}"></span>
+                </div>
+                <div class="d-flex align-items-center number me-4">
+                  Tổng tiền:&nbsp;&nbsp;<span class="text-danger fw-medium" th:text="${#numbers.formatInteger(session.totalAmountOfCart, 3, 'POINT')}"></span><sup class="text-danger">đ</sup>
+                </div>
+                <a href="javascript:void(0)" class="btn btn-md btn-success py-2 px-3" th:onclick="'javascript:orderProcess()'">
+                  <i class="fas fa-share me-2"></i>ĐẶT HÀNG
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </th:block>
+
+  <th:block layout:fragment="modal">
+    <!-- Modal address list -->
+    <div class="modal fade" id="addressListModal" tabindex="-1" aria-labelledby="addressListModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="addressListModalLabel">Danh sách địa chỉ</h1>
+          </div>
+          <div class="modal-body">
+            <div class="address" th:each="address, i : ${user.userAddressList}">
+              <div class="form-check d-flex align-items-center">
+                <input class="form-check-input me-2" type="radio" th:name="*{'radio' + i.count}" th:id="*{'radio' + i.count}">
+                <div class="address-info">
+                  <label class="form-check-label fw-medium" th:for="*{'radio' + i.count}">
+                    <i class="fas fa-user fa-fw me-2"></i><span th:text="*{address.receiverName + ' - ' + address.receiverMobile}"></span>
+                    <sup class="badge bg-success-subtle border text-success-emphasis rounded-pill ms-1" th:if="*{address.defaultAddress}">Mặc định</sup>
+                  </label>
+                  <label>
+                    <i class="fas fa-map-marker-alt fa-fw me-2"></i><span th:text="*{address.fullAddress}"></span>
+                  </label>
+                </div>
+              </div>
+              <hr th:if="*{i.index != (user.userAddressList.size() - 1)}">
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between">
+            <div>
+              <button type="button" class="btn btn-success"><i class="fas fa-plus me-2"></i>Thêm địa chỉ</button>
+            </div>
+            <div>
+              <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Đóng</button>
+              <button type="button" class="btn btn-danger"><i class="fas fa-check me-2"></i>Xác nhận</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </th:block>
+
+  <th:block layout:fragment="js">
+    <script th:src="@{/js/checkout.js}"></script>
+  </th:block>
+</body>
+</html>
